@@ -128,7 +128,38 @@ namespace AddressBookADO.NET_Problem
                 Console.WriteLine(ex.Message);
             }
         }
+        public void DeleteDataFromDB(string firstName)
+        {
+            SqlConnection sqlConnection = new SqlConnection(connectionString);
+            try
+            {
+                using (sqlConnection)
+                {
+                    sqlConnection.Open();
+                    SqlCommand cmd = new SqlCommand("SPDeleteDataFromDB", sqlConnection);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("FirstName", firstName);
 
 
+                    int result = cmd.ExecuteNonQuery();
+                    sqlConnection.Close();
+                    if (result >= 1)
+                    {
+                        Console.WriteLine("Contact Deleted Successfully");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Not Updated");
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
     }
 }
+
+    

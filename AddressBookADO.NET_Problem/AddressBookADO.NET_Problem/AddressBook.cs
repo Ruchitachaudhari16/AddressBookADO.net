@@ -96,6 +96,39 @@ namespace AddressBookADO.NET_Problem
                 Console.WriteLine(ex.Message);
             }
         }
+        public void UpdateDataInDB(Contacts contacts)
+        {
+
+            SqlConnection sqlConnection = new SqlConnection(connectionString);
+            try
+            {
+                using (sqlConnection)
+                {
+                    sqlConnection.Open();
+                    //Select * from tablename
+                    SqlCommand cmd = new SqlCommand("SPUpdateData", sqlConnection);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("FirstName", contacts.FirstName);
+                    cmd.Parameters.AddWithValue("LastName", contacts.LastName);
+                    cmd.Parameters.AddWithValue("City", contacts.City);
+                    int result = cmd.ExecuteNonQuery();
+                    sqlConnection.Close();
+                    if (result >= 1)
+                    {
+                        Console.WriteLine("Contact updated successfully");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Not Updated");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
 
     }
 }

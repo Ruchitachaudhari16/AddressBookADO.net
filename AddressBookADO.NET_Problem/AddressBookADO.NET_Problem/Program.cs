@@ -19,6 +19,7 @@ namespace AddressBookADO.NET_Problem
                 AddressBook addressBook = new AddressBook();
                 Console.WriteLine("1:Insert Value in Table");
                 Console.WriteLine("2:Get all data from database");
+                Console.WriteLine("3:Update Data From Database");
                 Console.WriteLine("Select correct option");
                 int choice = Convert.ToInt32(Console.ReadLine());
                 switch (choice)
@@ -29,6 +30,20 @@ namespace AddressBookADO.NET_Problem
                     case 2:
                         addressBook.GetAllDataFromDatabase();
                         break;
+                    case 3:
+                        Contacts contact = new Contacts()
+                        {
+                            FirstName = "Swati",
+                            LastName = "Gangurde",
+                            City = "SouthGoa"
+                        };
+                        addressBook.UpdateDataInDB(contact);
+                        break;
+
+                    default:
+                        Console.WriteLine("Invalid Choice");
+                        break;
+
 
 
                 }
